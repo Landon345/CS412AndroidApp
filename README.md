@@ -69,14 +69,33 @@ A **Main Activity** button returns to the main screen by calling `finish()`,
 which pops this activity off the back stack and reveals the existing
 `MainActivity` instance rather than creating a duplicate.
 
+### Services & Broadcast Receivers
+
+Three more buttons on the main screen exercise a foreground `Service` and a
+dynamically registered `BroadcastReceiver`:
+
+- **Start Service** — calls `ContextCompat.startForegroundService(...)` on
+  `MyService`. The service immediately calls `startForeground()` and posts a
+  notification: *"The service has started"* (visible in the notification
+  shade).
+- **Bind Service** — calls `bindService(...)`. Once connected, `MainActivity`
+  calls `MyService.getMyGrade()` through the returned `Binder` and displays
+  the result next to the button.
+- **Send Broadcast** — sends an explicit, same-package broadcast with action
+  `com.example.MY_ACTION`. `MyBroadcastReceiver`, registered dynamically in
+  `onStart()`/unregistered in `onStop()` (not declared in the manifest),
+  shows a Toast: *"Broadcast received!"*.
+
 ## Project Structure
 
 ```
 app/src/main/
-├── AndroidManifest.xml                  # Activity declarations + intent filter
+├── AndroidManifest.xml                  # Activity/service declarations + intent filter + permissions
 ├── java/com/example/intentsapp/
-│   ├── MainActivity.kt                  # Name, ID, and the two launch buttons
+│   ├── MainActivity.kt                  # Name, ID, activity/service/broadcast buttons
 │   ├── SecondActivity.kt                # Challenges list + return button
+│   ├── MyService.kt                     # Foreground + bindable service (getMyGrade())
+│   ├── MyBroadcastReceiver.kt           # Dynamically registered receiver
 │   └── ui/theme/                        # Compose theme
 └── res/                                 # Resources
 ```
