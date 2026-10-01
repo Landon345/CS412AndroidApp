@@ -19,6 +19,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:launchMode="singleInstance"
             android:theme="@style/Theme.IntentsApp"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -32,6 +33,7 @@
             android:name=".SecondActivity"
             android:exported="true"
             android:label="Second Activity"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.IntentsApp">
             <intent-filter>
                 <action android:name="com.example.intentsapp.ACTION_CHALLENGES" />
