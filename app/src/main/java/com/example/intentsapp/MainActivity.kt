@@ -29,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.example.intentsapp.ui.theme.IntentsAppTheme
@@ -95,6 +96,10 @@ class MainActivity : ComponentActivity() {
                                 .setPackage(packageName)
                                 .addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
                             sendBroadcast(intent)
+                        },
+                        onViewImage = {
+                            val intent = Intent(this, ThirdActivity::class.java)
+                            startActivity(intent)
                         }
                     )
                 }
@@ -134,7 +139,8 @@ fun MainScreen(
     onStartImplicitly: () -> Unit,
     onStartService: () -> Unit,
     onBindService: () -> Unit,
-    onSendBroadcast: () -> Unit
+    onSendBroadcast: () -> Unit,
+    onViewImage: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -201,6 +207,15 @@ fun MainScreen(
                 .padding(vertical = 8.dp)
         ) {
             Text(text = "Send Broadcast")
+        }
+
+        Button(
+            onClick = onViewImage,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+        ) {
+            Text(text = stringResource(R.string.view_image_activity))
         }
     }
 }
