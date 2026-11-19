@@ -20,6 +20,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Records which lines the androidTest (instrumented) tests execute.
+            enableAndroidTestCoverage = true
+        }
         release {
             optimization {
                 enable = false
@@ -49,6 +53,8 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.uiautomator)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
